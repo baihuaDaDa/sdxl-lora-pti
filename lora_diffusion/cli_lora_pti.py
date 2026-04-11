@@ -23,7 +23,7 @@ from diffusers import (
     UNet2DConditionModel,
 )
 from diffusers.optimization import get_scheduler
-from huggingface_hub import HfFolder, Repository, whoami
+from huggingface_hub import whoami
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms

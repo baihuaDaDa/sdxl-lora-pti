@@ -9,3 +9,8 @@ exps*
 .vscode
 build
 lora_diffusion.egg-info
+
+data/
+output/
+deptree.txt
+*.png

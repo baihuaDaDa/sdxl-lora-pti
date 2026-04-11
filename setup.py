@@ -1,7 +1,16 @@
 import os
 
-import pkg_resources
 from setuptools import find_packages, setup
+
+
+def read_requirements(filename):
+    with open(os.path.join(os.path.dirname(__file__), filename)) as f:
+        return [
+            line.strip()
+            for line in f
+            if line.strip() and not line.startswith("#")
+        ]
+
 
 setup(
     name="lora_diffusion",
@@ -18,11 +27,6 @@ setup(
             "lora_ppim = lora_diffusion.preprocess_files:main",
         ],
     },
-    install_requires=[
-        str(r)
-        for r in pkg_resources.parse_requirements(
-            open(os.path.join(os.path.dirname(__file__), "requirements.txt"))
-        )
-    ],
+    install_requires=read_requirements("requirements.txt"),
     include_package_data=True,
 )
