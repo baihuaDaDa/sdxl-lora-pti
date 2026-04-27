@@ -16,3 +16,5 @@ deptree.txt
 *.png
 prompts.txt
 logs/
+
+metadata.csv

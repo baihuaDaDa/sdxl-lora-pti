@@ -1,0 +1,493 @@
+{
+  "shared": {
+    "model": "/dataset/stable-diffusion-xl-base-1.0",
+    "dtype": "fp16",
+    "steps": 40,
+    "guidance_scale": 7.5,
+    "width": 1024,
+    "height": 1024,
+    "negative_prompt": "low quality, blurry, deformed, extra fingers, bad anatomy, watermark, text",
+    "seeds": [13, 37, 73],
+    "scales": [0.8]
+  },
+  "groups": [
+    {
+      "id": "mygo_base_reference",
+      "title": "Base SDXL without LoRA on mygo prompt",
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body template",
+          "prompt": "A anime style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_dreambooth_s2000",
+      "title": "DreamBooth LoRA on mygo prompt",
+      "lora": "../output_600_1/mygo_sdxl/lora_weight_s2000.safetensors",
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body template",
+          "prompt": "A anime style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_pti_s2000_reference",
+      "title": "PTI LoRA on mygo prompt",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight.safetensors",
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body template",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_base_multistyle",
+      "title": "Base SDXL on mygo prompt",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body prompt",
+          "prompt": "A anime style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_pti_multistyle",
+      "title": "PTI SDXL on mygo prompt",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body prompt",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "jojo_base_multistyle",
+      "title": "Base SDXL on jojo prompt",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "jojo_template",
+          "title": "Jojo base prompt",
+          "prompt": "A anime style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, iconic jojo pose, dramatic lighting, dynamic angle"
+        }
+      ]
+    },
+    {
+      "id": "jojo_pti_multistyle",
+      "title": "PTI SDXL on jojo prompt",
+      "lora": "../output_2000_4/jojo_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "jojo_template",
+          "title": "Jojo PTI prompt",
+          "prompt": "A <jojo> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, iconic jojo pose, dramatic lighting, dynamic angle"
+        }
+      ]
+    },
+    {
+      "id": "wushan_base_multistyle",
+      "title": "Base SDXL on wushan prompt",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "wushan_template",
+          "title": "Wushan base prompt",
+          "prompt": "A anime style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, blazing flames, dynamic combat stance, intense gaze, ink wash painting influence, action pose"
+        }
+      ]
+    },
+    {
+      "id": "wushan_pti_multistyle",
+      "title": "PTI SDXL on wushan prompt",
+      "lora": "../output_2000_4/wushan_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "wushan_template",
+          "title": "Wushan PTI prompt",
+          "prompt": "A <wushan> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, blazing flames, dynamic combat stance, intense gaze, ink wash painting influence, action pose"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk_base_multistyle",
+      "title": "Base SDXL on cyberpunk prompt",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "cyberpunk_template",
+          "title": "Cyberpunk base prompt",
+          "prompt": "A anime style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, cyberpunk city background, neon lights, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk_pti_multistyle",
+      "title": "PTI SDXL on cyberpunk prompt",
+      "lora": "../output_2000_4/cyberpunk_all_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "cyberpunk_template",
+          "title": "Cyberpunk PTI prompt",
+          "prompt": "A <cyberpunk2> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, cyberpunk city background, neon lights, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "mygo_pti_s600_scale_sweep",
+      "title": "PTI mygo step 600 scale sweep",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight_e85_s600.safetensors",
+      "scales": [0.4, 0.8, 1.2],
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body template",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_pti_s1000_scale_sweep",
+      "title": "PTI mygo step 1000 scale sweep",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight_e142_s1000.safetensors",
+      "scales": [0.4, 0.8, 1.2],
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body template",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_pti_s2000_scale_sweep",
+      "title": "PTI mygo step 2000 scale sweep",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight.safetensors",
+      "scales": [0.4, 0.8, 1.2],
+      "cases": [
+        {
+          "id": "mygo_half_body",
+          "title": "MyGO half body template",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk_portrait_final",
+      "title": "PTI cyberpunk portrait-only dataset",
+      "lora": "../output_2000_4/cyberpunk_portrait_sdxl_pti/lora_weight.safetensors",
+      "cases": [
+        {
+          "id": "cyberpunk_template",
+          "title": "Cyberpunk template prompt",
+          "prompt": "A <cyberpunk1> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, cyberpunk city background, neon lights, looking at viewer"
+        },
+        {
+          "id": "cyberpunk_wide_scene",
+          "title": "Cyberpunk wide-scene prompt",
+          "prompt": "A <cyberpunk1> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, full body, wide shot, rainy neon street, towering hologram billboards, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk_all_final",
+      "title": "PTI cyberpunk portrait-plus-scene dataset",
+      "lora": "../output_2000_4/cyberpunk_all_sdxl_pti/lora_weight.safetensors",
+      "cases": [
+        {
+          "id": "cyberpunk_template",
+          "title": "Cyberpunk template prompt",
+          "prompt": "A <cyberpunk2> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, cyberpunk city background, neon lights, looking at viewer"
+        },
+        {
+          "id": "cyberpunk_wide_scene",
+          "title": "Cyberpunk wide-scene prompt",
+          "prompt": "A <cyberpunk2> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, full body, wide shot, rainy neon street, towering hologram billboards, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "mygo_pti_prompt_capability",
+      "title": "PTI final model prompt capability on mygo",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight.safetensors",
+      "cases": [
+        {
+          "id": "avatar_closeup",
+          "title": "Close-up portrait",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, close-up portrait, looking at viewer, expressive eyes, face focus"
+        },
+        {
+          "id": "half_body_stage",
+          "title": "Half body stage shot",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        },
+        {
+          "id": "full_body_stage",
+          "title": "Full body stage shot",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, full body, standing on stage, stage spotlight"
+        },
+        {
+          "id": "background_heavy",
+          "title": "Background-heavy composition",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, small figure in frame, large concert stage, crowd lights, LED screens, complex stage background, singing with microphone"
+        }
+      ]
+    },
+    {
+      "id": "jojo_style_transfer_on_mygo",
+      "title": "Use jojo style token with mygo appearance prompt",
+      "lora": "../output_2000_4/jojo_sdxl_pti/lora_weight.safetensors",
+      "cases": [
+        {
+          "id": "jojo_on_mygo",
+          "title": "Jojo style transfer on mygo appearance",
+          "prompt": "A <jojo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, serious expression, iconic jojo pose, dramatic lighting, dynamic angle, upper body"
+        }
+      ]
+    },
+    {
+      "id": "mygo_style_transfer_matrix",
+      "title": "Use mygo token on other style appearance prompts",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "mygo_on_jojo",
+          "title": "Mygo style transfer on jojo appearance",
+          "prompt": "A <mygo> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, dramatic lighting, dynamic angle, upper body"
+        },
+        {
+          "id": "mygo_on_wushan",
+          "title": "Mygo style transfer on wushan appearance",
+          "prompt": "A <mygo> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, blazing flames, dynamic combat stance, intense gaze, action pose"
+        },
+        {
+          "id": "mygo_on_cyberpunk",
+          "title": "Mygo style transfer on cyberpunk appearance",
+          "prompt": "A <mygo> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, neon city background, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "jojo_style_transfer_matrix",
+      "title": "Use jojo token on other style appearance prompts",
+      "lora": "../output_2000_4/jojo_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "jojo_on_mygo",
+          "title": "Jojo style transfer on mygo appearance",
+          "prompt": "A <jojo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, serious expression, iconic jojo pose, dramatic lighting, dynamic angle, upper body"
+        },
+        {
+          "id": "jojo_on_wushan",
+          "title": "Jojo style transfer on wushan appearance",
+          "prompt": "A <jojo> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, dramatic lighting, dynamic angle, intense gaze"
+        },
+        {
+          "id": "jojo_on_cyberpunk",
+          "title": "Jojo style transfer on cyberpunk appearance",
+          "prompt": "A <jojo> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dramatic lighting, dynamic angle, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "wushan_style_transfer_matrix",
+      "title": "Use wushan token on other style appearance prompts",
+      "lora": "../output_2000_4/wushan_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "wushan_on_mygo",
+          "title": "Wushan style transfer on mygo appearance",
+          "prompt": "A <wushan> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, intense gaze, fiery aura, action pose"
+        },
+        {
+          "id": "wushan_on_jojo",
+          "title": "Wushan style transfer on jojo appearance",
+          "prompt": "A <wushan> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, gold chain on collar, pointing finger forward, intense gaze, ink wash painting influence, action pose"
+        },
+        {
+          "id": "wushan_on_cyberpunk",
+          "title": "Wushan style transfer on cyberpunk appearance",
+          "prompt": "A <wushan> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, white netrunner suit, holding glowing red monowire, blazing flames, action pose, intense gaze"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk_style_transfer_matrix",
+      "title": "Use cyberpunk token on other style appearance prompts",
+      "lora": "../output_2000_4/cyberpunk_all_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "cyberpunk_on_mygo",
+          "title": "Cyberpunk style transfer on mygo appearance",
+          "prompt": "A <cyberpunk2> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, neon stage lights, hologram effects, looking at viewer, upper body"
+        },
+        {
+          "id": "cyberpunk_on_jojo",
+          "title": "Cyberpunk style transfer on jojo appearance",
+          "prompt": "A <cyberpunk2> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, gold chain on collar, pointing finger forward, neon city background, dramatic lighting"
+        },
+        {
+          "id": "cyberpunk_on_wushan",
+          "title": "Cyberpunk style transfer on wushan appearance",
+          "prompt": "A <cyberpunk2> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, holding spear, glowing energy effects, rainy neon street, dynamic combat stance"
+        }
+      ]
+    },
+    {
+      "id": "mygo_prompt_refinement_compare",
+      "title": "Prompt refinement for full body and heavy background",
+      "lora": "../output_2000_4/mygo_sdxl_pti/lora_weight.safetensors",
+      "cases": [
+        {
+          "id": "full_body_original",
+          "title": "Original full body prompt",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, full body, standing on stage, stage spotlight"
+        },
+        {
+          "id": "full_body_refined",
+          "title": "Refined full body prompt",
+          "prompt": "A <mygo> style full body photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, entire body in frame, head to toe visible, feet visible, standing on stage, holding microphone with both hands, long shot, centered composition, expressive eyes, stage spotlight",
+          "width": 832,
+          "height": 1216
+        },
+        {
+          "id": "background_original",
+          "title": "Original heavy background prompt",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, small figure in frame, large concert stage, crowd lights, LED screens, complex stage background, singing with microphone"
+        },
+        {
+          "id": "background_refined",
+          "title": "Refined heavy background prompt",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, very small full-body figure in frame, distant wide shot, huge concert stage environment, massive LED screens, crowd glow sticks, scaffolding, spotlights, complex background, environmental storytelling, singing with microphone",
+          "width": 1216,
+          "height": 832
+        }
+      ]
+    },
+    {
+      "id": "jojo_single_reference",
+      "title": "Single jojo LoRA reference",
+      "lora": "../output_2000_4/jojo_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "jojo_template",
+          "title": "Jojo template prompt",
+          "prompt": "A <jojo> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, iconic jojo pose, dramatic lighting, dynamic angle"
+        }
+      ]
+    },
+    {
+      "id": "wushan_single_reference",
+      "title": "Single wushan LoRA reference",
+      "lora": "../output_2000_4/wushan_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "wushan_template",
+          "title": "Wushan template prompt",
+          "prompt": "A <wushan> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, blazing flames, dynamic combat stance, intense gaze, ink wash painting influence, action pose"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk_all_single_reference",
+      "title": "Single cyberpunk-all LoRA reference",
+      "lora": "../output_2000_4/cyberpunk_all_sdxl_pti/lora_weight.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "cyberpunk_template",
+          "title": "Cyberpunk template prompt",
+          "prompt": "A <cyberpunk2> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, cyberpunk city background, neon lights, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "four_way_merge_reference",
+      "title": "Four-way merged LoRA token activation",
+      "lora": "../output_2000_4/four_merged_all.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "mygo_template",
+          "title": "MyGO template prompt on merged LoRA",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        },
+        {
+          "id": "jojo_template",
+          "title": "Jojo template prompt on merged LoRA",
+          "prompt": "A <jojo> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, iconic jojo pose, dramatic lighting, dynamic angle"
+        },
+        {
+          "id": "wushan_template",
+          "title": "Wushan template prompt on merged LoRA",
+          "prompt": "A <wushan> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, blazing flames, dynamic combat stance, intense gaze, ink wash painting influence, action pose"
+        },
+        {
+          "id": "cyberpunk_template",
+          "title": "Cyberpunk template prompt on merged LoRA",
+          "prompt": "A <cyberpunk2> style photo of a girl, bob cut, white hair, multicolored inner hair, pastel gradient hair, red eye makeup, white netrunner suit, holding glowing red monowire, dynamic swinging action, cyberpunk city background, neon lights, looking at viewer"
+        }
+      ]
+    },
+    {
+      "id": "two_way_merge_reference",
+      "title": "Two-way merged mygo and jojo",
+      "lora": "../output_2000_4/mygo_jojo_merged.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "mygo_template",
+          "title": "MyGO template prompt on two-way merge",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        },
+        {
+          "id": "jojo_template",
+          "title": "Jojo template prompt on two-way merge",
+          "prompt": "A <jojo> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, iconic jojo pose, dramatic lighting, dynamic angle"
+        }
+      ]
+    },
+    {
+      "id": "three_way_merge_reference",
+      "title": "Three-way merged mygo jojo and wushan",
+      "lora": "../output_2000_4/mygo_jojo_wushan_merged.safetensors",
+      "seeds": [13, 37],
+      "cases": [
+        {
+          "id": "mygo_template",
+          "title": "MyGO template prompt on three-way merge",
+          "prompt": "A <mygo> style photo of a girl, short grey hair, blue eyes, hanasakigawa girls' academy uniform, holding microphone, holding mic with both hands, singing earnestly, slightly hunched posture, expressive eyes, stage spotlight, upper body"
+        },
+        {
+          "id": "jojo_template",
+          "title": "Jojo template prompt on three-way merge",
+          "prompt": "A <jojo> style photo of a man, muscular, tall, black gakuran, long coat, peaked cap, hat seamlessly merging with hair, gold chain on collar, pointing finger forward, serious expression, iconic jojo pose, dramatic lighting, dynamic angle"
+        },
+        {
+          "id": "wushan_template",
+          "title": "Wushan template prompt on three-way merge",
+          "prompt": "A <wushan> style photo of a boy, messy black hair, ancient chinese clothes, martial arts attire, muscular, holding spear, fiery spear, blazing flames, dynamic combat stance, intense gaze, ink wash painting influence, action pose"
+        }
+      ]
+    }
+  ]
+}
