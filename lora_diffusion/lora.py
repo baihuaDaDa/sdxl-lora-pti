@@ -617,6 +617,104 @@ def parse_safeloras_embeds(
     return embeds
 
 
+def split_sdxl_learned_embeds(
+    learned_embeds: Dict[str, torch.Tensor],
+) -> Dict[str, Dict[str, torch.Tensor]]:
+    """
+    Groups SDXL textual inversion tensors into te1/te2 pairs keyed by the
+    prompt token that should be used at inference time.
+    """
+    grouped_embeds: Dict[str, Dict[str, torch.Tensor]] = {}
+
+    for token, tensor in learned_embeds.items():
+        if token.endswith("_te2"):
+            grouped_embeds.setdefault(token[:-4], {})["te2"] = tensor
+        else:
+            grouped_embeds.setdefault(token, {})["te1"] = tensor
+
+    missing_te1 = sorted(
+        token for token, pair in grouped_embeds.items() if "te2" in pair and "te1" not in pair
+    )
+    if missing_te1:
+        missing_display = ", ".join(missing_te1)
+        raise ValueError(
+            f"Found SDXL text_encoder_2 embeds without text_encoder pairs for: {missing_display}"
+        )
+
+    return grouped_embeds
+
+
+def _token_exists(tokenizer, token: str) -> bool:
+    return token in tokenizer.get_vocab()
+
+
+def _derive_unique_token(token: str, suffix_index: int) -> str:
+    if token.startswith("<") and token.endswith(">"):
+        return f"{token[:-1]}-{suffix_index}>"
+    return f"{token}_{suffix_index}"
+
+
+def apply_learned_embed_in_clip_sdxl(
+    learned_embeds: Dict[str, torch.Tensor],
+    text_encoder,
+    tokenizer,
+    text_encoder_2,
+    tokenizer_2,
+    token_map: Optional[Dict[str, str]] = None,
+    idempotent=False,
+) -> Dict[str, str]:
+    """
+    Applies SDXL learned embeds to both text encoders while keeping the runtime
+    prompt token identical across tokenizer_1 and tokenizer_2.
+    """
+    grouped_embeds = split_sdxl_learned_embeds(learned_embeds)
+    runtime_token_map: Dict[str, str] = {}
+
+    for base_token, pair in grouped_embeds.items():
+        desired_token = token_map.get(base_token, base_token) if token_map else base_token
+        actual_token = desired_token
+        suffix_index = 1
+
+        while True:
+            exists_1 = _token_exists(tokenizer, actual_token)
+            exists_2 = _token_exists(tokenizer_2, actual_token)
+
+            if not exists_1 and not exists_2:
+                tokenizer.add_tokens(actual_token)
+                tokenizer_2.add_tokens(actual_token)
+                break
+
+            if idempotent and exists_1 and exists_2:
+                break
+
+            actual_token = _derive_unique_token(desired_token, suffix_index)
+            suffix_index += 1
+
+        text_encoder.resize_token_embeddings(len(tokenizer))
+        text_encoder_2.resize_token_embeddings(len(tokenizer_2))
+
+        token_id_1 = tokenizer.convert_tokens_to_ids(actual_token)
+        token_id_2 = tokenizer_2.convert_tokens_to_ids(actual_token)
+
+        te1_weight = text_encoder.get_input_embeddings().weight.data
+        te2_weight = text_encoder_2.get_input_embeddings().weight.data
+
+        te1_weight[token_id_1] = pair["te1"].to(
+            device=te1_weight.device,
+            dtype=te1_weight.dtype,
+        )
+
+        te2_embed = pair.get("te2", pair["te1"])
+        te2_weight[token_id_2] = te2_embed.to(
+            device=te2_weight.device,
+            dtype=te2_weight.dtype,
+        )
+
+        runtime_token_map[base_token] = actual_token
+
+    return runtime_token_map
+
+
 def load_safeloras(path, device="cpu"):
     safeloras = safe_open(path, framework="pt", device=device)
     return parse_safeloras(safeloras)

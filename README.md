@@ -287,6 +287,24 @@ Set $\alpha_1 = \alpha_2 = 0.5$ to get the average of the two models. Set $\alph
 $ lora_add ./example_loras/analog_svd_rank4.safetensors ./example_loras/lora_krk.safetensors ./krk_analog.safetensors 2.0 0.7
 ```
 
+### Joining SDXL PTI LoRAs while preserving trigger tokens
+
+For SDXL PTI LoRAs, prefer join mode instead of linear interpolation so each
+concept keeps its own trigger token pair for `text_encoder` and `text_encoder_2`.
+
+```bash
+$ lora_add PATH_TO_SDXL_PTI_LORA1.safetensors PATH_TO_SDXL_PTI_LORA2.safetensors OUTPUT_PATH.safetensors --mode ljl-sdxl
+```
+
+If two LoRAs reuse the same placeholder token, provide explicit aliases:
+
+```bash
+$ lora_add PATH_TO_SDXL_PTI_LORA1.safetensors PATH_TO_SDXL_PTI_LORA2.safetensors OUTPUT_PATH.safetensors --mode ljl-sdxl --token_aliases "<charA>|<charB>"
+```
+
+The command writes a sidecar token map file next to the merged safetensors so you
+can see which prompt token to use for each merged concept.
+
 ### Making Text2Img Inference with trained LoRA
 
 Checkout `scripts/run_inference.ipynb` for an example of how to make inference with LoRA.

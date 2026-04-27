@@ -1,0 +1,22 @@
+扩散模型的微调
+注：下划线部分为超链接，请按住Ctrl并单击鼠标以跟踪链接
+概述
+本次作业旨在让学生体验使用扩散模型（Diffision Model）在自定义数据集上生成图像的能力。通过使用PyTorch框架以及我们提供的教程，学生将学会如何实现基本的图像生成。
+数据集选择和准备：
+任务描述：每个学生或小组需选择100张图像来训练扩散模型。
+图像种类：图像类型不限，可包括但不限于动漫角色、自然景观等。
+数据收集方法：小组成员应共同协作，找到90张图像，每个成员还需额外找到10张图像，以组成属于学生个人的、完整的100张图像数据集。
+实施步骤：
+参考资料：我们提供两种方法，也可以自己尝试其他方法。                方法1：Dreambooth 论文链接：https://arxiv.org/abs/2208.12242                         代码参考：https://github.com/XavierXiao/Dreambooth-Stable-Diffusion                https://huggingface.co/docs/diffusers/main/en/training/dreambooth                                                                      方法2： Lora 论文链接：https://arxiv.org/abs/2106.09685                                                        代码参考：https://github.com/cloneofsimo/lora
+https://huggingface.co/docs/diffusers/main/en/training/lora                                                                 其他可以考虑的方法有：textual_inversion；hypernetwork；controlnet等
+数据集构建：依照教程指导，从所选图像中构建数据集。
+模型训练：按照教程步骤，在PyTorch框架下微调模型。
+结果观察与可视化：在训练过程中关注各项指标，并对结果进行可视化展示。
+评估标准：
+图像生成质量：将根据生成图像的清晰度和真实感进行评估。
+训练过程观察：需要对训练过程进行详细的理解和分析。
+图像选择与数据集准备：考察数据集的多样性和选择的合理性。
+报告质量：报告需详尽、清晰且具有专业性。
+提交内容 (个人报告)
+提交形式：以个人报告的形式提交。
+报告内容：应包括数据集的选择、模型训练过程、生成图像的结果以及对整个过程的分析。

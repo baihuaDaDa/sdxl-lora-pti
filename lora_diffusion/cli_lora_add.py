@@ -1,4 +1,5 @@
 from typing import Literal, Union, Dict
+import json
 import os
 import shutil
 import fire
@@ -12,7 +13,7 @@ from .lora import (
     collapse_lora,
     monkeypatch_remove_lora,
 )
-from .lora_manager import lora_join
+from .lora_manager import lora_join, lora_join_sdxl
 from .to_ckpt_v2 import convert_to_ckpt
 
 
@@ -31,8 +32,11 @@ def add(
         "lpl",
         "upl",
         "upl-ckpt-v2",
+        "ljl",
+        "ljl-sdxl",
     ] = "lpl",
     with_text_lora: bool = False,
+    token_aliases: str = "",
 ):
     print("Lora Add, mode " + mode)
     if mode == "lpl":
@@ -177,6 +181,44 @@ def add(
 
         total_tensor, total_metadata, _, _ = lora_join([safeloras_1, safeloras_2])
         save_file(total_tensor, output_path, total_metadata)
+
+    elif mode == "ljl-sdxl":
+        print("Using SDXL Join mode : alpha will not have an effect here.")
+        assert path_1.endswith(".safetensors") and path_2.endswith(
+            ".safetensors"
+        ), "Only .safetensors files are supported"
+
+        alias_list = None
+        if token_aliases.strip():
+            alias_list = [token.strip() for token in token_aliases.split("|")]
+            if len(alias_list) != 2:
+                raise ValueError(
+                    "token_aliases must provide exactly two aliases separated by '|'"
+                )
+
+        safeloras_1 = safe_open(path_1, framework="pt", device="cpu")
+        safeloras_2 = safe_open(path_2, framework="pt", device="cpu")
+
+        total_tensor, total_metadata, _, token_records = lora_join_sdxl(
+            [safeloras_1, safeloras_2],
+            token_aliases=alias_list,
+        )
+        save_file(total_tensor, output_path, total_metadata)
+
+        sidecar_path = os.path.splitext(output_path)[0] + ".token_map.json"
+        sidecar_payload = {
+            "mode": mode,
+            "inputs": [path_1, path_2],
+            "tokens": token_records,
+        }
+        with open(sidecar_path, "w") as f:
+            json.dump(sidecar_payload, f, indent=2, ensure_ascii=True)
+
+        print(f"Saved SDXL token map to {sidecar_path}")
+        for record in token_records:
+            print(
+                f"  LoRA #{record['source_index'] + 1}: {record['source_token']} -> {record['merged_token']}"
+            )
 
     else:
         print("Unknown mode", mode)
